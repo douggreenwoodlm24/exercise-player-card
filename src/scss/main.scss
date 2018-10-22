@@ -1,12 +1,25 @@
-#container {
-  display: flex;
-  justify-content: space-around;
+// #container {
+//   display: flex;
+//   justify-content: space-around;
 
-  #scss {
-    color: red;
+//   #scss {
+//     color: red;
 
-    &:hover {
-      color: blue;
-    }
-  }
+//     &:hover {
+//       color: blue;
+//     }
+//   }
+// }
+
+.product-list {
+	li {
+		width: 100px;
+		height:100px;
+		margin:10px;
+		float: left;
+		list-style: none;
+		img {
+			max-width: 100px;
+		}
+	}
 }

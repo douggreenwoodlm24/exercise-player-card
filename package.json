@@ -6,7 +6,8 @@
   "author": "Margarita Obraztsova <marharyta.obraztsova@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack --mode development"
+    "dev": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production"
   },
   "dependencies": {
     "autoprefixer": "^8.6.3",
@@ -25,5 +26,8 @@
     "webpack": "^4.12.0",
     "webpack-cli": "^3.0.8",
     "webpack-md5-hash": "^0.0.6"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.1.9"
   }
 }

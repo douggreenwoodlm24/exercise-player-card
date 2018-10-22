@@ -5,10 +5,19 @@
 </head>
 
 <body>
-    <div id="container">
-        <span id="scss">A "Hello, world!" from .scss!</span>
-        <span id="sass">A "Hello, world!" from .sass!</span>
-    </div>
+    <section>
+	    <form>
+	    	<select id="sort-list">
+			  <option value="price-low-high">Price: Low to high</option>
+			  <option value="price-high-low">Price: High to low</option>
+			  <option value="title-a-z">Title: A to Z</option>
+			  <option value="title-z-a">Title: Z to A</option>
+			</select>
+	    </form>
+    	<ul class="product-list"></ul>
+    </section>
+
+
 
     <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
