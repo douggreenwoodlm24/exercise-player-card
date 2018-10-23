@@ -12,6 +12,7 @@
 // }
 
 .product-list {
+	height: 300px;
 	li {
 		width: 100px;
 		height:100px;
@@ -20,6 +21,37 @@
 		list-style: none;
 		img {
 			max-width: 100px;
+		}
+	}
+}
+
+.basket-container {
+	clear: both;
+	width:100%;
+	.basket {
+		.col1 {
+			width: 55%;
+		}
+		.col2 {
+			width: 15%;
+		}
+		.col3 {
+			width: 15%;
+		}
+		.col3 {
+			width: 15%;
+		}
+		td:nth-child(1), th:nth-child(1){
+			text-align: left;
+		}
+		td:nth-child(2), th:nth-child(2){
+			text-align: right;
+		}
+		td:nth-child(3), th:nth-child(3){
+			text-align: right;
+		}
+		td:nth-child(4), th:nth-child(4){
+			text-align: center;
 		}
 	}
 }

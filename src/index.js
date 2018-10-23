@@ -82,8 +82,68 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 	// Build list when page loads for first time
     buildList(myObj);
 
+    // Basket functionality
+	document.querySelectorAll('.btn-addToCart').onclick = function (){
+		
+	};
 
-	
+	var addToCartButtons = document.querySelectorAll( ".btn-addToCart" );
+	for ( let counter = 0; counter < addToCartButtons.length; counter++)
+	{
+	    addToCartButtons[counter].addEventListener("click", function(){
+	    	let itemTitle = this.getAttribute('data-title');
+			let itemPrice = this.getAttribute('data-price');
+			let itemQuantity = this.getAttribute('data-quantity');
+			let itemQuantityId = counter;
+			itemQuantity++;
+			this.setAttribute('data-quantity',itemQuantity);
+			//console.log(itemQuantity);
+			if(itemQuantity === 1){
+				// this is a new item
+				this.setAttribute('data-inBasket','inBasket');
+				let basketItem = document.createElement('tr');
+				let totalItemPrice = itemPrice;
+				basketItem.setAttribute('data-inBasket','in-basket' + counter);
+				basketItem.innerHTML = `
+				<td>${itemTitle}</td>
+				<td><span id='in-basket-${counter}'>${itemQuantity}</span></td>
+				<td data-count='true' id='in-basket-price-${counter}'>${totalItemPrice}</td>
+				<td><button class="remove-item" id='in-basket-remove-${counter}'>X</button></td>
+				`;
+				document.querySelector('.basket').appendChild(basketItem);
+				calculateTotal();
+				//console.log('Item added');
+			} else {
+				// basket already contains this item
+				//console.log('Item already in basket');
+				let totalItemPrice = itemPrice * itemQuantity;
+				document.querySelector('#in-basket-' + counter).innerHTML = itemQuantity;
+				document.querySelector('#in-basket-price-' + counter).innerHTML = totalItemPrice;
+				calculateTotal();
+			}
+			
+	   });
+	};
+
+
+	// Calculate total of basket
+	function calculateTotal(){
+		let basketTotalContainer = document.querySelector('#basket-total');
+		basketTotalContainer.innerHTML = '';
+		let basket = document.querySelector('.basket'), sumVal = 0;
+		for(let i = 0; i < (basket.rows.length-1); i++){
+			//console.log(basket.rows[i].cells[2].innerHTML);
+			let numTotal = Number(basket.rows[i].cells[2].innerHTML);
+			sumVal = sumVal + numTotal;
+
+			// add functionality to remove button
+		};
+		//console.log(sumVal);
+		basketTotalContainer.innerHTML = sumVal;
+	};
+
+
+
 
 
 // END PAGE FUNCTIONALITY
@@ -96,10 +156,21 @@ function buildList(listData){
 	document.querySelector('.product-list').innerHTML = '';
 	for(let i = 1; i < listData.products.length; i++){
 		var productListItem = document.createElement('li');
-		productListItem.innerHTML = "<div id='product-" + i + "'><img src='" + listData.products[i].images[0].src + "' alt='" + listData.products[i].title + "'><h3>" + listData.products[i].title + "</h3><p>" + listData.products[i].variants[0].price + "</p></div>";
+		//productListItem.innerHTML = "<div id='product-" + i + "'><img src='" + listData.products[i].images[0].src + "' alt='" + listData.products[i].title + "'><h3>" + listData.products[i].title + "</h3><p>" + listData.products[i].variants[0].price + "</p></div>";
+		productListItem.innerHTML = `
+		<div><img src='${listData.products[i].images[0].src}' alt='${listData.products[i].title}'>
+		<h3>${listData.products[i].title}</h3>
+		<p>${listData.products[i].variants[0].price}</p>
+		<button class='btn-addToCart' id='cartItem${i}' data-title='${listData.products[i].title}' data-price='${listData.products[i].variants[0].price}' data-quantity='${0}'>Add to cart</button>
+		</div>`;
 		document.querySelector('.product-list').appendChild(productListItem);
 	};
 }
+
+// Basket functionality
+// basketName = [];
+// basketQuantity = [];
+// basketPrice = [];
 
 
 
