@@ -5,41 +5,47 @@
 </head>
 
 <body>
-    <section>
-	    <form>
+	<nav>
+		<a href="#"><img src="img/logo.png" alt="Eclectees logo"></a>
+	</nav>
+	<section >
+		<div class="basket-container">
+	    	<h4>Basket:</h4>
+	    	<table class="basket">
+	    		<colgroup>
+				    <col class="col1">
+				    <col class="col2">
+				    <col class="col3">
+				    <col class="col3">
+				</colgroup>
+				<th>Item</th>
+				<th>Qty</th>
+				<th></th>
+				<th></th>
+				<tfoot>
+			    <tr>
+			      <td>Total:</td>
+			      <td></td>
+			      <td id="basket-total"></td>
+			      <td></td>
+			    </tr>
+			  </tfoot>
+			</table>
+		</div>
+		<div class="sort-container">
+			<h4>Sort items:</h4>
 	    	<select id="sort-list">
 			  <option value="price-low-high">Price: Low to high</option>
 			  <option value="price-high-low">Price: High to low</option>
 			  <option value="title-a-z">Title: A to Z</option>
 			  <option value="title-z-a">Title: Z to A</option>
 			</select>
-	    </form>
+		</div>
+    </section>
+    <section>
     	<ul class="product-list"></ul>
     </section>
-    <div class="basket-container">
-    	<h4>Basket:</h4>
-    	<ul ></ul>
-    	<table class="basket">
-    		<colgroup>
-			    <col class="col1">
-			    <col class="col2">
-			    <col class="col3">
-			    <col class="col3">
-			</colgroup>
-			<th>Item</th>
-			<th>Qty</th>
-			<th></th>
-			<th></th>
-			<tfoot>
-		    <tr>
-		      <td>Total:</td>
-		      <td></td>
-		      <td id="basket-total"></td>
-		      <td></td>
-		    </tr>
-		  </tfoot>
-		</table>
-    </div>
+    
 
 
 

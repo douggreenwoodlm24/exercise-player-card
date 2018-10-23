@@ -1,5 +1,7 @@
 import './scss/main.scss';
 
+
+
 // import JSON file
 var getJSON = function(url) {
   return new Promise(function(resolve, reject) {
@@ -48,10 +50,6 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
     buildList(myObj);
 
     // Basket functionality
-	document.querySelectorAll('.btn-addToCart').onclick = function (){
-		
-	};
-
 	var addToCartButtons = document.querySelectorAll( ".btn-addToCart" );
 	for ( let counter = 0; counter < addToCartButtons.length; counter++)
 	{
@@ -75,12 +73,19 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 				<td data-count='true' id='in-basket-price-${counter}'>${totalItemPrice}</td>
 				<td><button class="remove-item" id='in-basket-remove-${counter}'>X</button></td>
 				`;
+				// Remove item button
+				document.addEventListener('click', function (event) {
+					if (event.target.matches('#in-basket-remove-' + counter)) {
+						// remove current row
+
+						// recalculate total
+					}
+				}, false);
+
 				document.querySelector('.basket').appendChild(basketItem);
 				calculateTotal();
-				//console.log('Item added');
 			} else {
 				// basket already contains this item
-				//console.log('Item already in basket');
 				let totalItemPrice = itemPrice * itemQuantity;
 				document.querySelector('#in-basket-' + counter).innerHTML = itemQuantity;
 				document.querySelector('#in-basket-price-' + counter).innerHTML = totalItemPrice;
@@ -89,6 +94,8 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 			
 	   });
 	};
+
+
 
 
 	// Calculate total of basket
@@ -102,26 +109,13 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 			basketTotalVal = basketTotalVal + rowTotal;
 		};
 		basketTotalContainer.innerHTML = basketTotalVal;
-		
-		// Remove item button
-		// document.querySelector('.remove-item').addEventListener('click', function(){
-		// 	console.log(basketTotalVal);
-		// 	basketTotalVal = basketTotalVal - rowTotal;
-		// 	console.log(basketTotalVal);
-		// 	//basketTotalContainer.innerHTML = basketTotalVal;
-		// } , false)
-
 	};
-
-
-
 
 
 // END PAGE FUNCTIONALITY
 }, function(status) { //error detection
   console.log('Something went wrong.');
 });
-
 
 function buildList(listData){
 	document.querySelector('.product-list').innerHTML = '';
@@ -133,6 +127,7 @@ function buildList(listData){
 		<h3 class='item-title'>${listData.products[i].title}</h3>
 		<p class='item-price'>${listData.products[i].variants[0].price}</p>
 		<button class='btn-addToCart' id='cartItem${i}' data-title='${listData.products[i].title}' data-price='${listData.products[i].variants[0].price}' data-quantity='${0}'>Add to cart</button>
+		<button class='quick-view'>Quick View</button>
 		`;
 		document.querySelector('.product-list').appendChild(productListItem);
 	};
@@ -239,12 +234,3 @@ function sortListDirPrice(direction) {
     }
   }
 }
-
-
-
-
-
-
-
-
-

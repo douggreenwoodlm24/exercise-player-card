@@ -1,0 +1,100 @@
+body {
+	background-color: $light-gray;
+	color: $text-gray;
+
+}
+
+
+h1, h2, h3, h4, h5, h6, p, td, th, button {
+	font-family: 'Raleway', sans-serif;
+}
+
+
+nav {
+	//background-image: url('./img/header.jpg');
+}
+.header {
+	
+}
+
+
+
+.product-list {
+	margin: 0;
+	li {
+		width: 200px;
+		height:auto;
+		margin:10px;
+		float: left;
+		list-style: none;
+		text-transform: uppercase;
+		background-color: #FFF;
+		padding: 1em;
+		img {
+			width: 200px;
+			height:auto;
+		}
+		.btn-addToCart {
+			background-color: $cta;
+			color: #FFF;
+			border: 0;
+			width: 50%;
+			float: left;
+			padding: 1em;
+			text-transform: uppercase;
+			cursor: pointer;
+		}
+		.quick-view {
+			background-color: $light-gray;
+			border: 0;
+			width: 50%;
+			float: left;
+			padding: 1em;
+			text-transform: uppercase;
+			cursor: pointer;
+		}
+	}
+}
+
+.basket-container {
+	clear: both;
+	width:100%;
+	background-color: #FFF;
+	padding: 1em;
+	.basket {
+		.col1 {
+			width: 55%;
+		}
+		.col2 {
+			width: 15%;
+		}
+		.col3 {
+			width: 15%;
+		}
+		.col3 {
+			width: 15%;
+		}
+		td:nth-child(1), th:nth-child(1){
+			text-align: left;
+		}
+		td:nth-child(2), th:nth-child(2){
+			text-align: right;
+		}
+		td:nth-child(3), th:nth-child(3){
+			text-align: right;
+		}
+		td:nth-child(4), th:nth-child(4){
+			text-align: center;
+		}
+		tfoot {
+			td {
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+.sort-container {
+	background-color: #FFF;
+	padding: 1em;
+}
