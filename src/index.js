@@ -27,57 +27,22 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 		var selectedSortType = document.querySelector("#sort-list").value;
 		switch (selectedSortType) {
 			case "price-low-high":
-				sortPriceLowHigh();
+				sortListDirPrice("asc");
 				break;
 			case "price-high-low":
-				sortPriceHighLow();
+				sortListDirPrice("desc");
 				break;
 			case "title-a-z":
-				sortTitleAZ();
+				sortListDirTitle("asc");
 				break;
 			case "title-z-a":
-				sortTitleZA();
+				sortListDirTitle("desc");
 				break;
 			default:
-				sortTitleAZ();
+				sortListDirTitle("asc");
 			}
 	}
-	function sortPriceLowHigh(){
-		myObj.products.sort( function( a, b ) {
-		    return a.variants[0].price < b.variants[0].price ? -1 : a.variants[0].price > b.variants[0].price ? 1 : 0;
-		});
-		for(let i = 1; i < myObj.products.length; i++){
-			//console.log(myObj.products[i].title, myObj.products[i].variants[0].price);
-			buildList(myObj);
-		};
-	};
-	function sortPriceHighLow(){
-		myObj.products.sort( function( a, b ) {
-		    return a.variants[0].price < b.variants[0].price ? 1 : a.variants[0].price > b.variants[0].price ? -1 : 0;
-		});
-		for(let i = 1; i < myObj.products.length; i++){
-			//console.log(myObj.products[i].title, myObj.products[i].variants[0].price);
-			buildList(myObj);
-		};
-	};
-	function sortTitleAZ(){
-		myObj.products.sort( function( a, b ) {
-		    return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
-		});
-		for(let i = 1; i < myObj.products.length; i++){
-			//console.log(myObj.products[i].title, myObj.products[i].variants[0].price);
-			buildList(myObj);
-		};
-	};
-	function sortTitleZA(){
-		myObj.products.sort( function( a, b ) {
-		    return a.title < b.title ? 1 : a.title > b.title ? -1 : 0;
-		});
-		for(let i = 1; i < myObj.products.length; i++){
-			//console.log(myObj.products[i].title, myObj.products[i].variants[0].price);
-			buildList(myObj);
-		};
-	};
+
 
 	// Build list when page loads for first time
     buildList(myObj);
@@ -130,16 +95,22 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 	function calculateTotal(){
 		let basketTotalContainer = document.querySelector('#basket-total');
 		basketTotalContainer.innerHTML = '';
-		let basket = document.querySelector('.basket'), sumVal = 0;
+		let basket = document.querySelector('.basket'), basketTotalVal = 0;
 		for(let i = 0; i < (basket.rows.length-1); i++){
 			//console.log(basket.rows[i].cells[2].innerHTML);
-			let numTotal = Number(basket.rows[i].cells[2].innerHTML);
-			sumVal = sumVal + numTotal;
-
-			// add functionality to remove button
+			let rowTotal = Number(basket.rows[i].cells[2].innerHTML);
+			basketTotalVal = basketTotalVal + rowTotal;
 		};
-		//console.log(sumVal);
-		basketTotalContainer.innerHTML = sumVal;
+		basketTotalContainer.innerHTML = basketTotalVal;
+		
+		// Remove item button
+		// document.querySelector('.remove-item').addEventListener('click', function(){
+		// 	console.log(basketTotalVal);
+		// 	basketTotalVal = basketTotalVal - rowTotal;
+		// 	console.log(basketTotalVal);
+		// 	//basketTotalContainer.innerHTML = basketTotalVal;
+		// } , false)
+
 	};
 
 
@@ -158,19 +129,116 @@ function buildList(listData){
 		var productListItem = document.createElement('li');
 		//productListItem.innerHTML = "<div id='product-" + i + "'><img src='" + listData.products[i].images[0].src + "' alt='" + listData.products[i].title + "'><h3>" + listData.products[i].title + "</h3><p>" + listData.products[i].variants[0].price + "</p></div>";
 		productListItem.innerHTML = `
-		<div><img src='${listData.products[i].images[0].src}' alt='${listData.products[i].title}'>
-		<h3>${listData.products[i].title}</h3>
-		<p>${listData.products[i].variants[0].price}</p>
+		<img src='${listData.products[i].images[0].src}' alt='${listData.products[i].title}'>
+		<h3 class='item-title'>${listData.products[i].title}</h3>
+		<p class='item-price'>${listData.products[i].variants[0].price}</p>
 		<button class='btn-addToCart' id='cartItem${i}' data-title='${listData.products[i].title}' data-price='${listData.products[i].variants[0].price}' data-quantity='${0}'>Add to cart</button>
-		</div>`;
+		`;
 		document.querySelector('.product-list').appendChild(productListItem);
 	};
+};
+
+function sortListDirTitle(direction) {
+  var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+  list = document.querySelector(".product-list");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = direction; 
+  //Make a loop that will continue until no switching has been done:
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    b = list.getElementsByTagName("li");
+    //Loop through all list-items:
+    for (i = 0; i < (b.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*check if the next item should switch place with the current item,
+      based on the sorting direction (asc or desc):*/
+      if (dir == "asc") {
+        if (b[i].querySelector('.item-title').innerHTML.toLowerCase() > b[i + 1].querySelector('.item-title').innerHTML.toLowerCase()) {
+          /*if next item is alphabetically lower than current item,
+          mark as a switch and break the loop:*/
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (b[i].querySelector('.item-title').innerHTML.toLowerCase() < b[i + 1].querySelector('.item-title').innerHTML.toLowerCase()) {
+          /*if next item is alphabetically higher than current item,
+          mark as a switch and break the loop:*/
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+      //Each time a switch is done, increase switchcount by 1:
+      switchcount ++;
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
 }
 
-// Basket functionality
-// basketName = [];
-// basketQuantity = [];
-// basketPrice = [];
+function sortListDirPrice(direction) {
+  var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+  list = document.querySelector(".product-list");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = direction; 
+  //Make a loop that will continue until no switching has been done:
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    b = list.getElementsByTagName("li");
+    //Loop through all list-items:
+    for (i = 0; i < (b.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*check if the next item should switch place with the current item,
+      based on the sorting direction (asc or desc):*/
+      if (dir == "asc") {
+        if (b[i].querySelector('.item-price').innerHTML.toLowerCase() > b[i + 1].querySelector('.item-price').innerHTML.toLowerCase()) {
+          /*if next item is alphabetically lower than current item,
+          mark as a switch and break the loop:*/
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (b[i].querySelector('.item-price').innerHTML.toLowerCase() < b[i + 1].querySelector('.item-price').innerHTML.toLowerCase()) {
+          /*if next item is alphabetically higher than current item,
+          mark as a switch and break the loop:*/
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+      //Each time a switch is done, increase switchcount by 1:
+      switchcount ++;
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
 
 
 
