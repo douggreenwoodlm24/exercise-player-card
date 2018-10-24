@@ -3,10 +3,10 @@ body {
     grid-template-areas: 
       "header"
       "nav"
-      "main";
-      //"footer";
+      "main"
+      "footer";
     //grid-template-rows: 80px 1fr 70px; // 1fr 70px;
-    grid-template-rows: 80px auto auto; // 1fr 70px;  
+    grid-template-rows: 80px auto auto auto;  
     grid-template-columns: 1fr;
     grid-row-gap: 10px;
   grid-column-gap: 10px;
@@ -35,9 +35,9 @@ header, footer, article, main, nav, div {
   body { 
   grid-template-areas: 
     "header header header"
-    "main main nav";
-    //"footer footer footer";
-  grid-template-rows: 300px 1fr; // 70px;  
+    "main main nav"
+    "footer footer footer";
+  grid-template-rows: 300px 1fr 70px;  
   //grid-template-columns: 1fr 20% 15%;
   grid-template-columns: 35% 35% 25%;
   

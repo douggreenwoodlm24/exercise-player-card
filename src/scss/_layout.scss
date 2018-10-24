@@ -9,6 +9,10 @@ h1, h2, h3, h4, h5, h6, p, td, th, button, select, option, label {
 	font-family: 'Raleway', Tahoma, sans-serif;
 }
 
+a {
+	color: $cta;
+}
+
 button.remove-item {
 	background-color: $cta;
 	padding: 6px 12px;
@@ -233,3 +237,18 @@ label {
 }
 
 /* PRODUCT LIST /end */
+
+footer {
+	padding: 0 0 20px 0;
+	margin: 0 0 20px 0;
+	img {
+		margin: 0 auto;
+		display: block;
+	}
+	p {
+		font-family: 'Raleway', Tahoma, sans-serif;
+		text-align: center;
+		font-size: 0.75em;
+		margin-bottom:20px;
+	}
+}

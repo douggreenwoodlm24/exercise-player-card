@@ -6,7 +6,10 @@ import imgMenu from './img/menu.png';
 
 // images
 var imgLogoHome = document.getElementById('img-logo');
+var footerLogo = document.getElementById('footer-logo');
 imgLogoHome.src = imgLogo;
+footerLogo.src = imgLogo;
+
 var imgHeaderHome = document.getElementById('img-header');
 imgHeaderHome.src = imgHeader;
 var imgBasketHome = document.getElementById('img-basket');
