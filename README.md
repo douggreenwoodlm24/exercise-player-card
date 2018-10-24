@@ -1,4 +1,4 @@
-This is an exercise I did for an interview for a Senior UI role.
+This is an exercise I did for an interview for a Senior UI Developer role.
 
 Project files:
 /dist/ = compiled files
