@@ -1,55 +1,68 @@
-<html>
-
-<head>
-    <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
+<html lang="en">
+<head lang="en">
+	<link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
+	<meta name="viewport" content="width=device-width">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>UI Exercise</title>
+	<meta name="description" content="UI Exercise">
+	<meta name="keywords" content="">
 </head>
 
 <body>
-	<nav>
-		<a href="#"><img src="img/logo.png" alt="Eclectees logo"></a>
-	</nav>
-	<section >
-		<div class="basket-container">
-	    	<h4>Basket:</h4>
-	    	<table class="basket">
-	    		<colgroup>
-				    <col class="col1">
-				    <col class="col2">
-				    <col class="col3">
-				    <col class="col3">
+	<header id="page-header">
+		<div class="row">
+			<div class="column">
+				<img id="img-logo" alt="logo">
+			</div>
+			<div class="column column-right">
+				<img id="img-basket" alt="basket">
+				<img id="img-menu" alt="menu">
+			</div>
+		</div>
+		<!-- <div class="header-container"></div> -->
+		
+		<img id="img-header" alt="Clothes">
+	</header>
+	<main id="products">
+		<ul class="product-list"></ul>
+	</main>
+	<nav id="controls">
+		<div class="basket-container hidden">
+			<h4>Basket:</h4>
+			<table class="basket">
+				<colgroup>
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col3">
 				</colgroup>
 				<th>Item</th>
 				<th>Qty</th>
 				<th></th>
 				<th></th>
 				<tfoot>
-			    <tr>
-			      <td>Total:</td>
-			      <td></td>
-			      <td id="basket-total"></td>
-			      <td></td>
-			    </tr>
-			  </tfoot>
+					<tr>
+						<td>Total:</td>
+						<td></td>
+						<td id="basket-total"></td>
+						<td></td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 		<div class="sort-container">
-			<h4>Sort items:</h4>
-	    	<select id="sort-list">
-			  <option value="price-low-high">Price: Low to high</option>
-			  <option value="price-high-low">Price: High to low</option>
-			  <option value="title-a-z">Title: A to Z</option>
-			  <option value="title-z-a">Title: Z to A</option>
+			<label for="sort-list">Sort items:</label>
+			<select id="sort-list">
+				<option value="price-low-high">Price: Low to high</option>
+				<option value="price-high-low">Price: High to low</option>
+				<option value="title-a-z">Title: A to Z</option>
+				<option value="title-z-a">Title: Z to A</option>
 			</select>
 		</div>
-    </section>
-    <section>
-    	<ul class="product-list"></ul>
-    </section>
-    
-
-
-
-    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+	</nav>
+	<!-- <footer id="page-footer">Footer</footer>  --> 
+	<script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
 
 </html>

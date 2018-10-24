@@ -1,6 +1,18 @@
 import './scss/main.scss';
+import imgLogo from './img/logo.png';
+import imgHeader from './img/header.jpg';
+import imgBasket from './img/basket.png';
+import imgMenu from './img/menu.png';
 
-
+// images
+var imgLogoHome = document.getElementById('img-logo');
+imgLogoHome.src = imgLogo;
+var imgHeaderHome = document.getElementById('img-header');
+imgHeaderHome.src = imgHeader;
+var imgBasketHome = document.getElementById('img-basket');
+imgBasketHome.src = imgBasket;
+var imgMenuHome = document.getElementById('img-menu');
+imgMenuHome.src = imgMenu;
 
 // import JSON file
 var getJSON = function(url) {
@@ -61,6 +73,7 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 			itemQuantity++;
 			this.setAttribute('data-quantity',itemQuantity);
 			//console.log(itemQuantity);
+			document.querySelector('.basket-container').classList.remove('hidden');
 			if(itemQuantity === 1){
 				// this is a new item
 				this.setAttribute('data-inBasket','inBasket');
@@ -124,8 +137,8 @@ function buildList(listData){
 		//productListItem.innerHTML = "<div id='product-" + i + "'><img src='" + listData.products[i].images[0].src + "' alt='" + listData.products[i].title + "'><h3>" + listData.products[i].title + "</h3><p>" + listData.products[i].variants[0].price + "</p></div>";
 		productListItem.innerHTML = `
 		<img src='${listData.products[i].images[0].src}' alt='${listData.products[i].title}'>
-		<h3 class='item-title'>${listData.products[i].title}</h3>
-		<p class='item-price'>${listData.products[i].variants[0].price}</p>
+		<div class='item-title'>${listData.products[i].title}</div>
+		<div class='item-price'>${listData.products[i].variants[0].price}</div>
 		<button class='btn-addToCart' id='cartItem${i}' data-title='${listData.products[i].title}' data-price='${listData.products[i].variants[0].price}' data-quantity='${0}'>Add to cart</button>
 		<button class='quick-view'>Quick View</button>
 		`;

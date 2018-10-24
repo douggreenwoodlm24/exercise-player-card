@@ -28,6 +28,7 @@
     "webpack-md5-hash": "^0.0.6"
   },
   "devDependencies": {
+    "file-loader": "^2.0.0",
     "webpack-dev-server": "^3.1.9"
   }
 }
