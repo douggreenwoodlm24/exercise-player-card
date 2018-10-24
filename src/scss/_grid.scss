@@ -31,7 +31,7 @@ header, footer, article, main, nav, div {
   grid-area: nav; 
   }
 /* Stack the layout on small devices/viewports. */
-@media all and (min-width: 768px) {
+@media all and (min-width: $medium) {
   body { 
   grid-template-areas: 
     "header header header"

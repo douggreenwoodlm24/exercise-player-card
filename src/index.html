@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
 <head lang="en">
 	<link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
@@ -17,7 +18,8 @@
 			</div>
 			<div class="column column-right header-links">
 				<img id="img-menu" alt="menu">
-				<div class="circle basket-count-container"><span class="basket-count">1</span></div>
+				<div class="mini-basket-container"><span id="mini-basket-total"></span></div>
+				<div class="circle basket-count-container"><span id="basket-count"></span></div>
 				<img id="img-basket" alt="basket">
 			</div>
 		</div>
@@ -49,7 +51,7 @@
 				<thead>
 					<tr>
 						<th>Item</th>
-						<th>Qty</th>
+						<th></th>
 						<th></th>
 					</tr>
 				</thead>

@@ -72,7 +72,6 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 			let itemQuantityId = counter;
 			itemQuantity++;
 			this.setAttribute('data-quantity',itemQuantity);
-			//console.log(itemQuantity);
 			document.querySelector('.basket-container').classList.remove('hidden');
 			if(itemQuantity === 1){
 				// this is a new item
@@ -113,14 +112,22 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 	// Calculate total of basket
 	function calculateTotal(){
 		let basketTotalContainer = document.querySelector('#basket-total');
+		let basketCount = document.querySelector('#basket-count');
+		let minibasketTotal = document.querySelector('#mini-basket-total');
 		basketTotalContainer.innerHTML = '';
-		let basket = document.querySelector('.basket'), basketTotalVal = 0;
-		for(let i = 0; i < (basket.rows.length-1); i++){
-			//console.log(basket.rows[i].cells[2].innerHTML);
+		basketCount.innerHTML = '';
+		minibasketTotal.innerHTML = '';
+		let basket = document.querySelector('.basket tbody'), basketTotalVal = 0, basketTotalItems = 0, basketTotalValCurrency;
+		for(let i = 0; i < (basket.rows.length); i++){
 			let rowTotal = Number(basket.rows[i].cells[2].innerHTML);
+			let itemsTotal = Number(basket.rows[i].cells[1].childNodes[0].innerHTML);
 			basketTotalVal = basketTotalVal + rowTotal;
+			basketTotalValCurrency = basketTotalVal.toFixed(2);
+			basketTotalItems = basketTotalItems + itemsTotal;		
 		};
-		basketTotalContainer.innerHTML = basketTotalVal;
+		basketTotalContainer.innerHTML = basketTotalValCurrency;
+		basketCount.innerHTML = basketTotalItems;
+		minibasketTotal.innerHTML = basketTotalValCurrency;
 	};
 
 
@@ -133,7 +140,6 @@ function buildList(listData){
 	document.querySelector('.product-list').innerHTML = '';
 	for(let i = 1; i < listData.products.length; i++){
 		var productListItem = document.createElement('li');
-		//productListItem.innerHTML = "<div id='product-" + i + "'><img src='" + listData.products[i].images[0].src + "' alt='" + listData.products[i].title + "'><h3>" + listData.products[i].title + "</h3><p>" + listData.products[i].variants[0].price + "</p></div>";
 		productListItem.innerHTML = `
 		<img class='item-img' src='${listData.products[i].images[0].src}' alt='${listData.products[i].title}'>
 		<div class='item-title'>${listData.products[i].title}</div>
@@ -153,12 +159,10 @@ function sortListDirTitle(direction) {
   dir = direction; 
   //Make a loop that will continue until no switching has been done:
   while (switching) {
-    //start by saying: no switching is done:
     switching = false;
     b = list.getElementsByTagName("li");
     //Loop through all list-items:
     for (i = 0; i < (b.length - 1); i++) {
-      //start by saying there should be no switching:
       shouldSwitch = false;
       /*check if the next item should switch place with the current item,
       based on the sorting direction (asc or desc):*/
@@ -179,15 +183,10 @@ function sortListDirTitle(direction) {
       }
     }
     if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
       b[i].parentNode.insertBefore(b[i + 1], b[i]);
       switching = true;
-      //Each time a switch is done, increase switchcount by 1:
       switchcount ++;
     } else {
-      /*If no switching has been done AND the direction is "asc",
-      set the direction to "desc" and run the while loop again.*/
       if (switchcount == 0 && dir == "asc") {
         dir = "desc";
         switching = true;
@@ -204,12 +203,10 @@ function sortListDirPrice(direction) {
   dir = direction; 
   //Make a loop that will continue until no switching has been done:
   while (switching) {
-    //start by saying: no switching is done:
     switching = false;
     b = list.getElementsByTagName("li");
     //Loop through all list-items:
     for (i = 0; i < (b.length - 1); i++) {
-      //start by saying there should be no switching:
       shouldSwitch = false;
       /*check if the next item should switch place with the current item,
       based on the sorting direction (asc or desc):*/
@@ -230,15 +227,10 @@ function sortListDirPrice(direction) {
       }
     }
     if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
       b[i].parentNode.insertBefore(b[i + 1], b[i]);
       switching = true;
-      //Each time a switch is done, increase switchcount by 1:
       switchcount ++;
     } else {
-      /*If no switching has been done AND the direction is "asc",
-      set the direction to "desc" and run the while loop again.*/
       if (switchcount == 0 && dir == "asc") {
         dir = "desc";
         switching = true;

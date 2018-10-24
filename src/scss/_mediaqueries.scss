@@ -14,12 +14,17 @@
 @media all and (min-width: $medium) {
 	#img-logo {
 		margin:0 1em 1em 0;
+		max-width: none;
 	}
 
 	#img-header {
 		height: 200px;
 		margin: 0 auto 1em;
 	display: block;
+	}
+
+	.mini-basket-container, .circle.basket-count-container {
+		display: block;
 	}
 
 	.product-list {
@@ -60,12 +65,23 @@
 		li {
 			width: 30%;
 			margin: 0 10px 10px 10px;
-			min-height: 390px;
+			min-height: 360px;
 			.item-title {
 				min-height: 65px;
 			}
-			.item-img {
-				//max-height:280px;
+			button {
+				min-height: 50px;
+			}
+		}
+	}
+}
+
+@media all and (min-width: $large) {
+	.product-list {
+		li {
+			min-height: 450px;
+			.item-title {
+				min-height: 65px;
 			}
 			button {
 				min-height: 50px;
