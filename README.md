@@ -9,6 +9,12 @@ Project files:
 /package.json = Info for node dependencies. (Run npm install to load node_modules)
 /webpack.config.js = Info for the webpack configuration
 
+Instructions
+- Clone/save project to your machine
+- npm install (installs node dependencies)
+- npm run dev (run project locally)
+- npm run build (create final files in /dist/)
+
 The instructions for the exercise were:
 
 Using vanilla JavaScript (no third party plugins, ES6 is encouraged ), HTML and CSS, build
