@@ -136,7 +136,7 @@ function buildList(listData){
 		var productListItem = document.createElement('li');
 		//productListItem.innerHTML = "<div id='product-" + i + "'><img src='" + listData.products[i].images[0].src + "' alt='" + listData.products[i].title + "'><h3>" + listData.products[i].title + "</h3><p>" + listData.products[i].variants[0].price + "</p></div>";
 		productListItem.innerHTML = `
-		<img src='${listData.products[i].images[0].src}' alt='${listData.products[i].title}'>
+		<img class='item-img' src='${listData.products[i].images[0].src}' alt='${listData.products[i].title}'>
 		<div class='item-title'>${listData.products[i].title}</div>
 		<div class='item-price'>${listData.products[i].variants[0].price}</div>
 		<button class='btn-addToCart' id='cartItem${i}' data-title='${listData.products[i].title}' data-price='${listData.products[i].variants[0].price}' data-quantity='${0}'>Add to cart</button>

@@ -17,8 +17,7 @@ h1, h2, h3, h4, h5, h6, p, td, th, button, select, option, label {
 }
 
 #img-header {
-	margin: 0 auto 1em;
-	display: block;
+	display: none;
 }
 
 ul.product-list {
@@ -95,6 +94,7 @@ label {
 	clear: both;
 	width:auto;
 	select {
+		padding: 5px;
 			option {
 				font-size: 0.75em;
 			}	
@@ -116,7 +116,7 @@ label {
 		text-transform: uppercase;
 		background-color: #FFF;
 		
-		img {
+		.item-img {
 			margin: 5%;
 			width: 90%;
 			height:auto;
