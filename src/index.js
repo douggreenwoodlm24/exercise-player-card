@@ -66,6 +66,7 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 	for ( let counter = 0; counter < addToCartButtons.length; counter++)
 	{
 	    addToCartButtons[counter].addEventListener("click", function(){
+	    	let itemClicked = this;
 	    	let itemTitle = this.getAttribute('data-title');
 			let itemPrice = this.getAttribute('data-price');
 			let itemQuantity = this.getAttribute('data-quantity');
@@ -83,13 +84,20 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 				<td>${itemTitle}</td>
 				<td><span id='in-basket-${counter}'>${itemQuantity}</span></td>
 				<td data-count='true' id='in-basket-price-${counter}'>${totalItemPrice}</td>
+				<td><button class='remove-item' id='in-basket-remove-${counter}'>X</button></td>
 				`;
 				// Remove item button
 				document.addEventListener('click', function (event) {
 					if (event.target.matches('#in-basket-remove-' + counter)) {
 						// remove current row
-
+						let currentButton = document.querySelector('#in-basket-remove-' + counter);
+						let currentRow = currentButton.parentNode.parentNode;
+						currentRow.outerHTML = '';
 						// recalculate total
+						calculateTotal();
+						// reset item quantity so product can be re-added
+						itemClicked.setAttribute('data-quantity', '0');
+
 					}
 				}, false);
 
@@ -128,6 +136,11 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 		basketTotalContainer.innerHTML = basketTotalValCurrency;
 		basketCount.innerHTML = basketTotalItems;
 		minibasketTotal.innerHTML = basketTotalValCurrency;
+		// avoid 'undefined' if basket is empty
+		if (basketTotalValCurrency == null){
+			basketTotalContainer.innerHTML = '';
+			minibasketTotal.innerHTML = '';
+		}
 	};
 
 

@@ -9,6 +9,14 @@ h1, h2, h3, h4, h5, h6, p, td, th, button, select, option, label {
 	font-family: 'Raleway', Tahoma, sans-serif;
 }
 
+button.remove-item {
+	background-color: $cta;
+	padding: 6px 12px;
+	border: 0;
+	color: #FFF;
+	cursor: pointer;
+}
+
 #img-logo {
 	max-width: 140px;
 	margin-top:10px;
