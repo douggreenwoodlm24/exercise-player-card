@@ -84,7 +84,6 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 				<td>${itemTitle}</td>
 				<td><span id='in-basket-${counter}'>${itemQuantity}</span></td>
 				<td data-count='true' id='in-basket-price-${counter}'>${totalItemPrice}</td>
-				<td><button class="remove-item" id='in-basket-remove-${counter}'>X</button></td>
 				`;
 				// Remove item button
 				document.addEventListener('click', function (event) {
@@ -95,7 +94,7 @@ getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
 					}
 				}, false);
 
-				document.querySelector('.basket').appendChild(basketItem);
+				document.querySelector('.basket tbody').appendChild(basketItem);
 				calculateTotal();
 			} else {
 				// basket already contains this item

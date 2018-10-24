@@ -15,9 +15,10 @@
 			<div class="column">
 				<img id="img-logo" alt="logo">
 			</div>
-			<div class="column column-right">
-				<img id="img-basket" alt="basket">
+			<div class="column column-right header-links">
 				<img id="img-menu" alt="menu">
+				<div class="circle basket-count-container"><span class="basket-count">1</span></div>
+				<img id="img-basket" alt="basket">
 			</div>
 		</div>
 		<!-- <div class="header-container"></div> -->
@@ -28,37 +29,41 @@
 		<ul class="product-list"></ul>
 	</main>
 	<nav id="controls">
-		<div class="basket-container hidden">
-			<h4>Basket:</h4>
-			<table class="basket">
-				<colgroup>
-					<col class="col1">
-					<col class="col2">
-					<col class="col3">
-					<col class="col3">
-				</colgroup>
-				<th>Item</th>
-				<th>Qty</th>
-				<th></th>
-				<th></th>
-				<tfoot>
-					<tr>
-						<td>Total:</td>
-						<td></td>
-						<td id="basket-total"></td>
-						<td></td>
-					</tr>
-				</tfoot>
-			</table>
-		</div>
 		<div class="sort-container">
-			<label for="sort-list">Sort items:</label>
+			<label for="sort-list">Sort</label>
 			<select id="sort-list">
 				<option value="price-low-high">Price: Low to high</option>
 				<option value="price-high-low">Price: High to low</option>
 				<option value="title-a-z">Title: A to Z</option>
 				<option value="title-z-a">Title: Z to A</option>
 			</select>
+		</div>
+		<div class="basket-container hidden">
+			<h4>Cart</h4>
+			<table class="basket">
+				<colgroup>
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>Item</th>
+						<th>Qty</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>Total:</td>
+						<td></td>
+						<td id="basket-total"></td>
+					</tr>
+				</tfoot>
+			</table>
 		</div>
 	</nav>
 	<!-- <footer id="page-footer">Footer</footer>  --> 

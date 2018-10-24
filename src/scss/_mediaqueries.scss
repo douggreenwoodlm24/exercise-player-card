@@ -1,4 +1,4 @@
-@media all and (min-width: 640px) {
+@media all and (min-width: $smallMedium) {
 
 
 	.product-list {
@@ -11,7 +11,7 @@
 	}
 }
 
-@media all and (min-width: 768px) {
+@media all and (min-width: $medium) {
 	#img-logo {
 		margin:0 1em 1em 0;
 	}
@@ -55,12 +55,12 @@
 	}
 }
 
-@media all and (min-width: 920px) {
+@media all and (min-width: $mediumLarge) {
 	.product-list {
 		li {
 			width: 30%;
-			margin: 10px;
-			min-height: 380px;
+			margin: 0 10px 10px 10px;
+			min-height: 390px;
 			.item-title {
 				min-height: 65px;
 			}

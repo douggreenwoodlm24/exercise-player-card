@@ -20,6 +20,14 @@ h1, h2, h3, h4, h5, h6, p, td, th, button, select, option, label {
 	display: none;
 }
 
+#img-basket {
+	float: right;
+}
+
+#img-menu {
+	float: right;
+}
+
 ul.product-list {
 	margin-block-start: 0;
 	padding-inline-start: 0;
@@ -37,6 +45,29 @@ label {
 .header {
 	
 }
+.header-links {
+	height:61px;
+}
+
+.circle {
+   width:50px;
+    height:50px;
+    border-radius:25px;
+    font-size:20px;
+    font-weight: bold;
+    color:#fff;
+    line-height:0;
+    text-align:center;
+    background-color:$cta;
+    text-align: center;
+    display: inline;
+    font-family: 'Raleway', Tahoma, sans-serif;
+    float: right;
+    span {
+    	display: inline-block;
+    	margin-left: -2px;
+     }
+    }
 
 /* BASKET AND SORT AREA /start */
 
@@ -45,6 +76,17 @@ label {
 	width:auto;
 	background-color: #FFF;
 	padding: 1em;
+	h4 {
+		margin: 0 0 10px 0;
+	}
+	table, tbody, tfoot, thead, tr, th, td, { //resets
+			border-collapse: collapse;
+		    border-spacing: 0;
+		    margin: 0;
+		    padding: 0;
+		    border: 0;
+		}
+
 	.basket {
 		.col1 {
 			width: 55%;
@@ -55,35 +97,45 @@ label {
 		.col3 {
 			width: 15%;
 		}
-		.col3 {
-			width: 15%;
-		}
-		tr, th {
-			border-bottom: 1px solid $light-gray;
-			margin: 0 0 1em 0;
-			font-size: 0.75em;
-		}
-		tfoot {
+		
+
+			thead tr, tbody tr, tfoot tr {
+				border-bottom: 1px solid $light-gray;
+				margin: 0;
+				td, th {
+					margin: 0;
+					padding: 5px;
+					font-size: 0.75em;
+				}
+			}
+				
+				td:nth-child(1), th:nth-child(1){
+					text-align: left;
+				}
+				td:nth-child(2), th:nth-child(2){
+					text-align: right;
+				}
+				td:nth-child(3), th:nth-child(3){
+					text-align: right;
+				}
+				td:nth-child(4), th:nth-child(4){
+					text-align: center;
+				}
+			
+			tfoot {
 			border-top:  1px solid $light-gray;
+			background-color: $light-gray;
 			margin-top:3px;
-		}
-		td:nth-child(1), th:nth-child(1){
-			text-align: left;
-		}
-		td:nth-child(2), th:nth-child(2){
-			text-align: right;
-		}
-		td:nth-child(3), th:nth-child(3){
-			text-align: right;
-		}
-		td:nth-child(4), th:nth-child(4){
-			text-align: center;
-		}
-		tfoot {
-			td {
-				font-weight: bold;
+			tr {
+				background-color: $light-gray;
+				td {
+					font-weight: bold;
+					margin: 0;
+					background-color: $light-gray;
+				}
 			}
 		}
+
 		
 	}
 }
@@ -100,6 +152,8 @@ label {
 			}	
 		}
 }
+
+
 
 /* BASKET AND SORT AREA /end */
 
