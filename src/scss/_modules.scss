@@ -1,0 +1,17 @@
+.club-logo {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    background-color: #FFF;
+    position: relative;
+    .club-logo-icon {
+        width: 100px;
+        height: 100px;
+        background-color: transparent;
+        background-image:  url('../img/badges_sprite.png');
+        //background-size: 100% 100%;
+        position: absolute;
+        top: 25px;
+        left: 25px;
+    }
+}

@@ -33,7 +33,7 @@ getJSON(JSONFILE).then(function(data) {
 
 
 	// Build list when page loads for first time
-	buildList(myObj);
+	buildCard(myObj);
 	//buildMenu();
 
     
@@ -44,7 +44,7 @@ getJSON(JSONFILE).then(function(data) {
 });
 
 
-function buildList(listData){
+function buildCard(listData){
 	console.log(listData.players[0].player.name.first)
 	// initial dropdown setup
 	let dropdown = document.getElementById('player-dropdown');
@@ -66,6 +66,9 @@ function buildList(listData){
 		// build player card
 		var productListItem = document.createElement('li');
 		productListItem.innerHTML = `
+		<div class="club-logo">
+		<div class="club-logo-icon" style="background-position: -${listData.players[i].player.currentTeam.logoX}px -${listData.players[i].player.currentTeam.logoY}px"></div>
+		</div>
 		<img class='item-img' src='src/img/p${listData.players[i].player.id}.png' alt='${listData.players[i].player.name.first} ${listData.players[i].player.name.last}'>
 		<h2>${listData.players[i].player.name.first} ${listData.players[i].player.name.last}</h2>
 		<p>${listData.players[i].player.info.positionInfo}</p>
@@ -110,14 +113,3 @@ function search(getStatKey, statArray){
         }
     }
 }
-
-// var array = [
-//     { name:"appearances", value:"400", },
-// 	{ name:"goals", value:"10", },
-// 	{ name:"goal_assist", value:"2", },
-	
-// ];
-
-// var getStat = search("goal_assist", array);
-
-// console.log("result object", getStat.value)
