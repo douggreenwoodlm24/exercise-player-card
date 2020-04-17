@@ -11,70 +11,35 @@
 </head>
 
 <body>
-	<header id="page-header">
-		<div class="row">
-			<div class="column">
-				<img id="img-logo" alt="logo">
-			</div>
-			<div class="column column-right header-links">
-				<img id="img-menu" alt="menu">
-				<div class="mini-basket-container"><span id="mini-basket-total"></span></div>
-				<div class="circle basket-count-container"><span id="basket-count"></span></div>
-				<img id="img-basket" alt="basket">
-			</div>
-		</div>
-		<!-- <div class="header-container"></div> -->
-		
-		<img id="img-header" alt="Clothes">
-	</header>
 	<main id="products">
-		<ul class="product-list"></ul>
-	</main>
-	<nav id="controls">
-		<div class="sort-container">
-			<label for="sort-list">Sort</label>
-			<select id="sort-list">
-				<option value="price-low-high">Price: Low to high</option>
-				<option value="price-high-low">Price: High to low</option>
-				<option value="title-a-z">Title: A to Z</option>
-				<option value="title-z-a">Title: Z to A</option>
-			</select>
-		</div>
-		<div class="basket-container hidden">
-			<h4>Cart</h4>
-			<table class="basket">
-				<colgroup>
-					<col class="col1">
-					<col class="col2">
-					<col class="col3">
-					<col class="col4">
-				</colgroup>
-				<thead>
-					<tr>
-						<th>Item</th>
-						<th></th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
+			<label for="sort-list">Label for player dropdown</label>
+			<select id="player-dropdown" name="player-dropdown"></select>
 
-				</tbody>
-				<tfoot>
-					<tr>
-						<td>Total:</td>
-						<td></td>
-						<td id="basket-total"></td>
-						<td></td>
-					</tr>
-				</tfoot>
-			</table>
-		</div>
-	</nav>
+		<ul class="product-list"></ul>
+		<table>
+			<tr>
+			  <td>Appearances</td>
+			  <td></td>
+			</tr>
+			<tr>
+			  <td>Goals</td>
+			  <td></td>
+			</tr>
+			<tr>
+				<td>Assists</td>
+				<td></td>
+			  </tr>
+			  <tr>
+				<td>Goals per match</td>
+				<td></td>
+			  </tr>
+			  <tr>
+				<td>Passes per minute</td>
+				<td></td>
+			  </tr>
+		  </table>
+	</main>
 	<footer id="page-footer">
-		<img id="footer-logo" alt="logo">
-		<p>&copy; Eclectees Co. Ltd. 2018</p>
-		<p><a href="#">Terms &amp; Conditions</a> | <a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></p>
 	</footer>
 	<script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>

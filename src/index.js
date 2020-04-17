@@ -1,23 +1,8 @@
 import './scss/main.scss';
-import imgLogo from './img/logo.png';
-import imgHeader from './img/header.jpg';
-import imgBasket from './img/basket.png';
-import imgMenu from './img/menu.png';
-
-// images
-var imgLogoHome = document.getElementById('img-logo');
-var footerLogo = document.getElementById('footer-logo');
-imgLogoHome.src = imgLogo;
-footerLogo.src = imgLogo;
-
-var imgHeaderHome = document.getElementById('img-header');
-imgHeaderHome.src = imgHeader;
-var imgBasketHome = document.getElementById('img-basket');
-imgBasketHome.src = imgBasket;
-var imgMenuHome = document.getElementById('img-menu');
-imgMenuHome.src = imgMenu;
 
 // import JSON file
+const JSONFILE = './src/data/player-stats.json'
+
 var getJSON = function(url) {
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
@@ -34,223 +19,105 @@ var getJSON = function(url) {
     xhr.send();
   });
 };
-getJSON('https://j-parre.myshopify.com/products.json').then(function(data) {
+getJSON(JSONFILE).then(function(data) {
 // START PAGE FUNCTIONALITY
 
     var myObj = data;
 
     // Detect new sort type when change dropdown
-	document.querySelector("#sort-list").onchange = function (){
-		var selectedSortType = document.querySelector("#sort-list").value;
-		switch (selectedSortType) {
-			case "price-low-high":
-				sortListDirPrice("asc");
-				break;
-			case "price-high-low":
-				sortListDirPrice("desc");
-				break;
-			case "title-a-z":
-				sortListDirTitle("asc");
-				break;
-			case "title-z-a":
-				sortListDirTitle("desc");
-				break;
-			default:
-				sortListDirTitle("asc");
-			}
-	}
+	// document.querySelector("#sort-list").onchange = function (){
+		
+	// }
+
+	
 
 
 	// Build list when page loads for first time
-    buildList(myObj);
+	buildList(myObj);
+	//buildMenu();
 
-    // Basket functionality
-	var addToCartButtons = document.querySelectorAll( ".btn-addToCart" );
-	for ( let counter = 0; counter < addToCartButtons.length; counter++)
-	{
-	    addToCartButtons[counter].addEventListener("click", function(){
-	    	let itemClicked = this;
-	    	let itemTitle = this.getAttribute('data-title');
-			let itemPrice = this.getAttribute('data-price');
-			let itemQuantity = this.getAttribute('data-quantity');
-			let itemQuantityId = counter;
-			itemQuantity++;
-			this.setAttribute('data-quantity',itemQuantity);
-			document.querySelector('.basket-container').classList.remove('hidden');
-			if(itemQuantity === 1){
-				// this is a new item
-				this.setAttribute('data-inBasket','inBasket');
-				let basketItem = document.createElement('tr');
-				let totalItemPrice = itemPrice;
-				basketItem.setAttribute('data-inBasket','in-basket' + counter);
-				basketItem.innerHTML = `
-				<td>${itemTitle}</td>
-				<td><span id='in-basket-${counter}'>${itemQuantity}</span></td>
-				<td data-count='true' id='in-basket-price-${counter}'>${totalItemPrice}</td>
-				<td><button class='remove-item' id='in-basket-remove-${counter}'>X</button></td>
-				`;
-				// Remove item button
-				document.addEventListener('click', function (event) {
-					if (event.target.matches('#in-basket-remove-' + counter)) {
-						// remove current row
-						let currentButton = document.querySelector('#in-basket-remove-' + counter);
-						let currentRow = currentButton.parentNode.parentNode;
-						currentRow.outerHTML = '';
-						// recalculate total
-						calculateTotal();
-						// reset item quantity so product can be re-added
-						itemClicked.setAttribute('data-quantity', '0');
-
-					}
-				}, false);
-
-				document.querySelector('.basket tbody').appendChild(basketItem);
-				calculateTotal();
-			} else {
-				// basket already contains this item
-				let totalItemPrice = itemPrice * itemQuantity;
-				document.querySelector('#in-basket-' + counter).innerHTML = itemQuantity;
-				document.querySelector('#in-basket-price-' + counter).innerHTML = totalItemPrice;
-				calculateTotal();
-			}
-			
-	   });
-	};
-
-
-
-
-	// Calculate total of basket
-	function calculateTotal(){
-		let basketTotalContainer = document.querySelector('#basket-total');
-		let basketCount = document.querySelector('#basket-count');
-		let minibasketTotal = document.querySelector('#mini-basket-total');
-		basketTotalContainer.innerHTML = '';
-		basketCount.innerHTML = '';
-		minibasketTotal.innerHTML = '';
-		let basket = document.querySelector('.basket tbody'), basketTotalVal = 0, basketTotalItems = 0, basketTotalValCurrency;
-		for(let i = 0; i < (basket.rows.length); i++){
-			let rowTotal = Number(basket.rows[i].cells[2].innerHTML);
-			let itemsTotal = Number(basket.rows[i].cells[1].childNodes[0].innerHTML);
-			basketTotalVal = basketTotalVal + rowTotal;
-			basketTotalValCurrency = basketTotalVal.toFixed(2);
-			basketTotalItems = basketTotalItems + itemsTotal;		
-		};
-		basketTotalContainer.innerHTML = basketTotalValCurrency;
-		basketCount.innerHTML = basketTotalItems;
-		minibasketTotal.innerHTML = basketTotalValCurrency;
-		// avoid 'undefined' if basket is empty
-		if (basketTotalValCurrency == null){
-			basketTotalContainer.innerHTML = '';
-			minibasketTotal.innerHTML = '';
-		}
-	};
-
+    
 
 // END PAGE FUNCTIONALITY
 }, function(status) { //error detection
   console.log('Something went wrong.');
 });
 
+
 function buildList(listData){
+	console.log(listData.players[0].player.name.first)
+	// initial dropdown setup
+	let dropdown = document.getElementById('player-dropdown');
+	dropdown.length = 0;
+	let defaultOption = document.createElement('option');
+	defaultOption.text = 'Select a player...';
+	dropdown.add(defaultOption);
+	dropdown.selectedIndex = 0;
+	let option;
+
 	document.querySelector('.product-list').innerHTML = '';
-	for(let i = 1; i < listData.products.length; i++){
+	for(let i = 0; i < listData.players.length; i++){
+		// build dropdown options
+		option = document.createElement('option');
+		option.text = `${listData.players[i].player.name.first} ${listData.players[i].player.name.last}`;
+		option.value = listData.players[i].player.id;
+		dropdown.add(option);
+
+		// build player card
 		var productListItem = document.createElement('li');
 		productListItem.innerHTML = `
-		<img class='item-img' src='${listData.products[i].images[0].src}' alt='${listData.products[i].title}'>
-		<div class='item-title'>${listData.products[i].title}</div>
-		<div class='item-price'>${listData.products[i].variants[0].price}</div>
-		<button class='btn-addToCart' id='cartItem${i}' data-title='${listData.products[i].title}' data-price='${listData.products[i].variants[0].price}' data-quantity='${0}'>Add to cart</button>
-		<button class='quick-view'>Quick View</button>
+		<img class='item-img' src='src/img/p${listData.players[i].player.id}.png' alt='${listData.players[i].player.name.first} ${listData.players[i].player.name.last}'>
+		<h2>${listData.players[i].player.name.first} ${listData.players[i].player.name.last}</h2>
+		<p>${listData.players[i].player.info.positionInfo}</p>
+		<table>
+			<tr>
+			  <td>Appearances</td>
+			  <td>${search("appearances", listData.players[i].stats)}</td>
+			</tr>
+			<tr>
+			  <td>Goals</td>
+			  <td>${search("goals", listData.players[i].stats)}</td>
+			</tr>
+			<tr>
+				<td>Assists</td>
+				<td>${search("goal_assist", listData.players[i].stats)}</td>
+			  </tr>
+			  <tr>
+				<td>Goals per match</td>
+				<td>${Math.round((search("goals", listData.players[i].stats) / search("appearances", listData.players[i].stats))* 10) / 10}</td>
+			  </tr>
+			  <tr>
+				<td>Passes per minute</td>
+				
+				<td>${Math.round(((search("fwd_pass", listData.players[i].stats)+search("backward_pass", listData.players[i].stats)) / search("mins_played", listData.players[i].stats))* 10) / 10}</td>
+			  </tr>
+		  </table>
 		`;
 		document.querySelector('.product-list').appendChild(productListItem);
 	};
 };
 
-function sortListDirTitle(direction) {
-  var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
-  list = document.querySelector(".product-list");
-  switching = true;
-  //Set the sorting direction to ascending:
-  dir = direction; 
-  //Make a loop that will continue until no switching has been done:
-  while (switching) {
-    switching = false;
-    b = list.getElementsByTagName("li");
-    //Loop through all list-items:
-    for (i = 0; i < (b.length - 1); i++) {
-      shouldSwitch = false;
-      /*check if the next item should switch place with the current item,
-      based on the sorting direction (asc or desc):*/
-      if (dir == "asc") {
-        if (b[i].querySelector('.item-title').innerHTML.toLowerCase() > b[i + 1].querySelector('.item-title').innerHTML.toLowerCase()) {
-          /*if next item is alphabetically lower than current item,
-          mark as a switch and break the loop:*/
-          shouldSwitch = true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (b[i].querySelector('.item-title').innerHTML.toLowerCase() < b[i + 1].querySelector('.item-title').innerHTML.toLowerCase()) {
-          /*if next item is alphabetically higher than current item,
-          mark as a switch and break the loop:*/
-          shouldSwitch= true;
-          break;
-        }
-      }
-    }
-    if (shouldSwitch) {
-      b[i].parentNode.insertBefore(b[i + 1], b[i]);
-      switching = true;
-      switchcount ++;
-    } else {
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
-    }
-  }
+// Get the player ID when dropdown menu changes
+document.querySelector("#player-dropdown").onchange = function (){
+	var selectedSortType = document.querySelector("#player-dropdown").value;
 }
 
-function sortListDirPrice(direction) {
-  var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
-  list = document.querySelector(".product-list");
-  switching = true;
-  //Set the sorting direction to ascending:
-  dir = direction; 
-  //Make a loop that will continue until no switching has been done:
-  while (switching) {
-    switching = false;
-    b = list.getElementsByTagName("li");
-    //Loop through all list-items:
-    for (i = 0; i < (b.length - 1); i++) {
-      shouldSwitch = false;
-      /*check if the next item should switch place with the current item,
-      based on the sorting direction (asc or desc):*/
-      if (dir == "asc") {
-        if (b[i].querySelector('.item-price').innerHTML.toLowerCase() > b[i + 1].querySelector('.item-price').innerHTML.toLowerCase()) {
-          /*if next item is alphabetically lower than current item,
-          mark as a switch and break the loop:*/
-          shouldSwitch = true;
-          break;
+// Get stat values from JSON
+function search(getStatKey, statArray){
+    for (var i=0; i < statArray.length; i++) {
+        if (statArray[i].name === getStatKey) {
+            return statArray[i].value;
         }
-      } else if (dir == "desc") {
-        if (b[i].querySelector('.item-price').innerHTML.toLowerCase() < b[i + 1].querySelector('.item-price').innerHTML.toLowerCase()) {
-          /*if next item is alphabetically higher than current item,
-          mark as a switch and break the loop:*/
-          shouldSwitch= true;
-          break;
-        }
-      }
     }
-    if (shouldSwitch) {
-      b[i].parentNode.insertBefore(b[i + 1], b[i]);
-      switching = true;
-      switchcount ++;
-    } else {
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
-    }
-  }
 }
+
+// var array = [
+//     { name:"appearances", value:"400", },
+// 	{ name:"goals", value:"10", },
+// 	{ name:"goal_assist", value:"2", },
+	
+// ];
+
+// var getStat = search("goal_assist", array);
+
+// console.log("result object", getStat.value)
