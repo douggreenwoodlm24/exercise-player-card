@@ -95,7 +95,8 @@
                 top: 25px;
                 left: 25px;
                 zoom: 0.67;
-                
+                -moz-transform:scale(0.67);
+                -moz-transform-origin: -25px -25px;
             }
         }
         h2 {

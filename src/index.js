@@ -24,7 +24,7 @@ getJSON(JSONFILE).then(function(data) {
 // Build dropdown list when page loads for first time
     myObj = data;
 	setupPage(myObj);
-	buildCard(4916, myObj);
+	buildCard(4916, myObj); // ID added so a player shows on page load
 }, function(status) { //error detection
   console.log('Something went wrong.');
 });
