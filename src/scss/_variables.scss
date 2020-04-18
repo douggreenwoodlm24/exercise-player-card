@@ -1,7 +1,17 @@
 /* Colours */
-$light-gray: #e8e6e9;
-$cta: #dc6666;
-$text-gray: #333333;
+$color-white: #FFF;
+$color-light-gray: #eaeaea;
+$color-text-gray: #333333;
+$color-pink: #ec0050;
+
+$cta: $color-pink;
+$color-primary: $color-pink;
+
+
+/* Spacing: Padding, margins, etc */
+$spacing-sm: 10px;
+$spacing-md: 20px;
+$spacing-lg: 40px;
 
 /* Media queries  */
 $smallMedium: 640px;
