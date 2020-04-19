@@ -1,21 +1,19 @@
 import './scss/main.scss';
+import p2064 from './img/p2064.png';
+import p4148 from './img/p4148.png';
+import p4246 from './img/p4246.png';
+import p4916 from './img/p4916.png';
+import p8983 from './img/p8983.png';
+import playerDataFile from './data/player-stats.json';
 
 // CONSTANTS AND GLOBAL VARIABLES
-const JSONFILE = './src/data/player-stats.json';
-var myObj, logoX, logoY;;
-var xmlhttp = new XMLHttpRequest();
-var url = './src/data/player-stats.json';
+var logoX, logoY, playerImage;
+var imgArray = [p2064, p4148, p4246, p4916, p8983];
 
-// LOAD THE JSON DATA
-xmlhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    myObj = JSON.parse(this.responseText);
-	setupPage(myObj); // Run function to set up page
-	buildCard(4916, myObj); // Run function to show a player on page load (4916 is a hard-coded player ID)
-  }
-};
-xmlhttp.open('GET', url, true);
-xmlhttp.send();
+// INITIAL PAGE LOAD FUNCTIONS
+setupPage(playerDataFile); // Run function to set up page
+buildCard(4916, playerDataFile); // Run function to show a player on page load (4916 is Toby Alderweireld)
+getPlayerImage(4916, imgArray) // Run function to show that player's image on page load (4916 is Toby Alderweireld)
 
 // SET UP PAGE ON PAGE LOAD
 function setupPage(listData){
@@ -34,6 +32,16 @@ function setupPage(listData){
 		dropdown.add(option);
 	};
 };
+
+// FUNCTION TO SET THE PLAYER IMAGE
+function getPlayerImage(selectedPlayerId, allImgArray){
+	playerImage = `p${selectedPlayerId}.png`;
+	for(let k = 0; k < allImgArray.length; k++){
+		if(playerImage == allImgArray[k]){
+			return allImgArray[k];
+		}
+	};
+}
 
 // FUNCTION TO GET THE SPRITE CO-ORDINATES FOR THE CLUB LOGOS
 function getClubLogo(selectedClubId){
@@ -78,7 +86,7 @@ function buildCard(selectedPlayerId, playersData){
 	getClubLogo(selectedPlayer.player.currentTeam.id);
 	document.querySelector('#player-card-logo-icon').setAttribute('style', `background-position: -${logoX}px -${logoY}px`);
 	// Sets the player image SRC and alt tag
-	document.querySelector('#player-card-img').setAttribute('src', `src/img/p${selectedPlayer.player.id}.png`);
+	document.querySelector('#player-card-img').setAttribute('src', getPlayerImage(selectedPlayer.player.id, imgArray));
 	document.querySelector('#player-card-img').setAttribute('alt', `${selectedPlayer.player.name.first} ${selectedPlayer.player.name.last}`);
 	// Sets player name & position
 	document.querySelector('#player-card-name').innerHTML = `${selectedPlayer.player.name.first} ${selectedPlayer.player.name.last}`;
@@ -95,7 +103,7 @@ function buildCard(selectedPlayerId, playersData){
 // WHEN THE DROPDOWN MENU IS CHANGED, GET THE NEW PLAYER ID AND BUILD THE NEW CARD
 document.querySelector('#player-dropdown').onchange = function (){
 	var selectedSortType = document.querySelector('#player-dropdown').value;
-	buildCard(selectedSortType, myObj);
+	buildCard(selectedSortType, playerDataFile);
 }
 
 // GET STATISTICAL VALUES (E.G. GOALS, APPEARANCES, ETC) FROM THE NESTED ARRAY IN THE JSON DATA
