@@ -14,7 +14,7 @@ xmlhttp.onreadystatechange = function() {
 	buildCard(4916, myObj); // Run function to show a player on page load (4916 is a hard-coded player ID)
   }
 };
-xmlhttp.open("GET", url, true);
+xmlhttp.open('GET', url, true);
 xmlhttp.send();
 
 // SET UP PAGE ON PAGE LOAD
@@ -76,25 +76,25 @@ function buildCard(selectedPlayerId, playersData){
 	}
 	// Gets & sets the logo sprite co-ordinates
 	getClubLogo(selectedPlayer.player.currentTeam.id);
-	document.querySelector('#player-card-logo-icon').setAttribute("style", `background-position: -${logoX}px -${logoY}px`);
+	document.querySelector('#player-card-logo-icon').setAttribute('style', `background-position: -${logoX}px -${logoY}px`);
 	// Sets the player image SRC and alt tag
-	document.querySelector('#player-card-img').setAttribute("src", `src/img/p${selectedPlayer.player.id}.png`);
-	document.querySelector('#player-card-img').setAttribute("alt", `${selectedPlayer.player.name.first} ${selectedPlayer.player.name.last}`);
+	document.querySelector('#player-card-img').setAttribute('src', `src/img/p${selectedPlayer.player.id}.png`);
+	document.querySelector('#player-card-img').setAttribute('alt', `${selectedPlayer.player.name.first} ${selectedPlayer.player.name.last}`);
 	// Sets player name & position
 	document.querySelector('#player-card-name').innerHTML = `${selectedPlayer.player.name.first} ${selectedPlayer.player.name.last}`;
 	document.querySelector('#player-card-position').innerHTML = `${selectedPlayer.player.info.positionInfo}`;
-	// These run the search() function as they need to loop through a nested array (and look for the name (e.g. "appearances")) within the JSON data
-	document.querySelector('#player-card-appearances').innerHTML = `${search("appearances", selectedPlayer.stats)}`;
-	document.querySelector('#player-card-goals').innerHTML = `${search("goals", selectedPlayer.stats)}`;
-	document.querySelector('#player-card-assists').innerHTML = `${search("goal_assist", selectedPlayer.stats)}`;
+	// These run the search() function as they need to loop through a nested array (and look for the name (e.g. 'appearances')) within the JSON data
+	document.querySelector('#player-card-appearances').innerHTML = `${search('appearances', selectedPlayer.stats)}`;
+	document.querySelector('#player-card-goals').innerHTML = `${search('goals', selectedPlayer.stats)}`;
+	document.querySelector('#player-card-assists').innerHTML = `${search('goal_assist', selectedPlayer.stats)}`;
 	// These also run the search() function, but in addition A: need to run a calculation to get the value to display, and B: need to be rounded to 1 decimal
-	document.querySelector('#player-card-goals-per-match').innerHTML = `${Math.round((search("goals", selectedPlayer.stats) / search("appearances", selectedPlayer.stats))* 10) / 10}`;
-	document.querySelector('#player-card-passes').innerHTML = `${Math.round(((search("fwd_pass", selectedPlayer.stats)+search("backward_pass", selectedPlayer.stats)) / search("mins_played", selectedPlayer.stats))* 10) / 10}`;
+	document.querySelector('#player-card-goals-per-match').innerHTML = `${Math.round((search('goals', selectedPlayer.stats) / search('appearances', selectedPlayer.stats))* 10) / 10}`;
+	document.querySelector('#player-card-passes').innerHTML = `${Math.round(((search('fwd_pass', selectedPlayer.stats)+search('backward_pass', selectedPlayer.stats)) / search('mins_played', selectedPlayer.stats))* 10) / 10}`;
 }
 
 // WHEN THE DROPDOWN MENU IS CHANGED, GET THE NEW PLAYER ID AND BUILD THE NEW CARD
-document.querySelector("#player-dropdown").onchange = function (){
-	var selectedSortType = document.querySelector("#player-dropdown").value;
+document.querySelector('#player-dropdown').onchange = function (){
+	var selectedSortType = document.querySelector('#player-dropdown').value;
 	buildCard(selectedSortType, myObj);
 }
 

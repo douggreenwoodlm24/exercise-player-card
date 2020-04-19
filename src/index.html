@@ -12,21 +12,20 @@
 
 <body>
 	<main id="products">
-		<!-- DROPDOWN MENU: With label for accessibility -->
-		<div class="form-container">
-			<label for="player-dropdown" class="display-none">Select a player</label> 
-			<select id="player-dropdown" name="player-dropdown" class="select-css"></select>
-		</div>
+		<!-- DROPDOWN MENU: With aria-label for accessibility -->
+		<form class="player-form">
+			<select id="player-dropdown" name="player-dropdown" class="select-css" aria-label="Select a player"></select>
+		</form>
 		<!-- PLAYER CARD -->
 		<section class="player-card">
-			<img id="player-card-img" class='item-img'>
-			<div class="card-info">
-				<div class="club-logo">
-				<div id="player-card-logo-icon" class="club-logo-icon"></div>
+			<img id="player-card-img" class="item-img" alt="">
+			<div class="player-card-info">
+				<div class="player-card-club-logo">
+					<div id="player-card-logo-icon" class="player-card-club-logo-icon"></div>
 				</div>
 				<h2 id="player-card-name"></h2>
 				<p id="player-card-position"></p>
-				<table class="table-stats">
+				<table class="player-card-table-stats">
 					<tr>
 					  <td>Appearances</td>
 					  <td id="player-card-appearances"></td>
