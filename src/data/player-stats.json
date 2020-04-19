@@ -22,9 +22,7 @@
           "name": "Tottenham Hotspur",
           "teamType": "FIRST",
           "shortName": "Spurs",
-          "id": 21,
-          "logoX": 500,
-          "logoY": 1000
+          "id": 21
         }
       },
       "stats": [
@@ -88,9 +86,7 @@
           "name": "Manchester City",
           "teamType": "FIRST",
           "shortName": "Man City",
-          "id": 11,
-          "logoX": 800,
-          "logoY": 700
+          "id": 11
         }
       },
       "stats": [
@@ -154,9 +150,7 @@
           "name": "Manchester United",
           "teamType": "FIRST",
           "shortName": "Man Utd",
-          "id": 12,
-          "logoX": 600,
-          "logoY": 800
+          "id": 12
         }
       },
       "stats": [
@@ -220,9 +214,7 @@
           "name": "Arsenal",
           "teamType": "FIRST",
           "shortName": "Arsenal",
-          "id": 1,
-          "logoX": 100,
-          "logoY": 100
+          "id": 1
         }
       },
       "stats": [
@@ -282,9 +274,7 @@
           "name": "Leicester City",
           "teamType": "FIRST",
           "shortName": "Leicester",
-          "id": 26,
-          "logoX": 0,
-          "logoY": 0
+          "id": 26
         }
       },
       "stats": [

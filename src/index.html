@@ -5,21 +5,53 @@
 	<meta name="viewport" content="width=device-width">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>UI Exercise</title>
+	<title>Premier League Player Data Card</title>
 	<meta name="description" content="UI Exercise">
 	<meta name="keywords" content="">
 </head>
 
 <body>
 	<main id="products">
+		<!-- DROPDOWN MENU: With label for accessibility -->
 		<div class="form-container">
-			<label for="player-dropdown" class="display-none">Select a player</label>
+			<label for="player-dropdown" class="display-none">Select a player</label> 
 			<select id="player-dropdown" name="player-dropdown" class="select-css"></select>
 		</div>
-		<section class="player-card"></section>
+		<!-- PLAYER CARD -->
+		<section class="player-card">
+			<img id="player-card-img" class='item-img'>
+			<div class="card-info">
+				<div class="club-logo">
+				<div id="player-card-logo-icon" class="club-logo-icon"></div>
+				</div>
+				<h2 id="player-card-name"></h2>
+				<p id="player-card-position"></p>
+				<table class="table-stats">
+					<tr>
+					  <td>Appearances</td>
+					  <td id="player-card-appearances"></td>
+					</tr>
+					<tr>
+					  <td>Goals</td>
+					  <td id="player-card-goals"></td>
+					</tr>
+					<tr>
+						<td>Assists</td>
+						<td id="player-card-assists"></td>
+					  </tr>
+					  <tr>
+						<td>Goals per match</td>
+						<td id="player-card-goals-per-match"></td>
+					  </tr>
+					  <tr>
+						<td>Passes per minute</td>	
+						<td id="player-card-passes"></td>
+					  </tr>
+				  </table>
+				  </div>
+		</section>
 	</main>
-	<footer id="page-footer">
-	</footer>
+	<!-- COMPILED FILES -->
 	<script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
 
