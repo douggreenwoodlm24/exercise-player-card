@@ -96,7 +96,9 @@
                 left: 25px;
                 zoom: 0.67;
                 -moz-transform:scale(0.67);
+                -ms-transform:scale(0.8);
                 -moz-transform-origin: -25px -25px;
+                -ms-transform-origin: 0px 0px;
             }
         }
         h2 {

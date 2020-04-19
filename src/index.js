@@ -4,30 +4,44 @@ import './scss/main.scss';
 const JSONFILE = './src/data/player-stats.json';
 var myObj;
 
-var getJSON = function(url) {
-  return new Promise(function(resolve, reject) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('get', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status == 200) {
-        resolve(xhr.response);
-      } else {
-        reject(status);
-      }
-    };
-    xhr.send();
-  });
-};
-getJSON(JSONFILE).then(function(data) {
-// Build dropdown list when page loads for first time
-    myObj = data;
+// var getJSON = function(url) {
+//   return new Promise(function(resolve, reject) {
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('get', url, true);
+//     xhr.responseType = 'json';
+//     xhr.onload = function() {
+//       var status = xhr.status;
+//       if (status == 200) {
+//         resolve(xhr.response);
+//       } else {
+//         reject(status);
+//       }
+//     };
+//     xhr.send();
+//   });
+// };
+// getJSON(JSONFILE).then(function(data) {
+// // Build dropdown list when page loads for first time
+//     myObj = data;
+// 	setupPage(myObj);
+// 	buildCard(4916, myObj); // ID added so a player shows on page load
+// }, function(status) { //error detection
+//   console.log('Something went wrong.');
+// });
+
+var xmlhttp = new XMLHttpRequest();
+var url = './src/data/player-stats.json';
+
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    myObj = JSON.parse(this.responseText);
+	//myObj = data;
 	setupPage(myObj);
 	buildCard(4916, myObj); // ID added so a player shows on page load
-}, function(status) { //error detection
-  console.log('Something went wrong.');
-});
+  }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
 
 
 function setupPage(listData){
@@ -87,8 +101,7 @@ function buildCard(selectedPlayerId, playersData){
 			<td>${Math.round((search("goals", selectedPlayer.stats) / search("appearances", selectedPlayer.stats))* 10) / 10}</td>
 		  </tr>
 		  <tr>
-			<td>Passes per minute</td>
-			
+			<td>Passes per minute</td>	
 			<td>${Math.round(((search("fwd_pass", selectedPlayer.stats)+search("backward_pass", selectedPlayer.stats)) / search("mins_played", selectedPlayer.stats))* 10) / 10}</td>
 		  </tr>
 	  </table>
